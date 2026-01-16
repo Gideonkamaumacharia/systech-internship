@@ -1,4 +1,4 @@
-package exceptions;
+package javaSECert.exceptions;
 
 public class TryCatchExceptionHandling {
     public static void main(String[] args) {
