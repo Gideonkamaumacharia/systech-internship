@@ -1,4 +1,4 @@
-package abstraction;
+package javaSECert.abstraction;
 
 public class Dog extends Animal {
     @Override

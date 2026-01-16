@@ -1,4 +1,4 @@
-package abstraction;
+package javaSECert.abstraction;
 
 public class Cat extends Animal implements AnimalInterface{
 

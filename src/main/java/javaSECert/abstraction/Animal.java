@@ -1,4 +1,4 @@
-package abstraction;
+package javaSECert.abstraction;
 
 public abstract class Animal {
     String name;

@@ -1,6 +1,6 @@
-package abstraction;
+package javaSECert.abstraction;
 
-public class Main {
+public class Test {
     public static void main(String[] args) {
         Cat myCat = new Cat();
         myCat.makeSound();
