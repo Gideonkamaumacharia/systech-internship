@@ -1,4 +1,4 @@
-package javaSECert;
+package javaSECert.generalExercises;
 
 public class HelloWorld {
     public static void main(String[] args) {
