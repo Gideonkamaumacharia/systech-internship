@@ -1,4 +1,4 @@
-package org.example;
+package org.example.exercisesAndAssignments;
 
 public class Casting {
     int myInt = 10; //Higher
@@ -13,6 +13,15 @@ public class Casting {
         System.out.println(myShort);
     }
    //byte --> short --> int --> float --> double --> long
+    //When we do arithemtic operations with small numbers like short,byte or char,they get promoted to int
+    //eg short x=2; short y=2; the result of +.-,*,/ or % is an promoted to int
+
+    // __CONCLUSION-- :
+         //In Java, all arithmetic operations on byte, short, and char are automatically promoted to int.
+            //short x = 2;
+            //short y = 2;
+            //short z = x + y; // ❌ COMPILATION ERROR coz the result of the expression is an int
+
 
     public static void main(String[] args) {
         int a =3;

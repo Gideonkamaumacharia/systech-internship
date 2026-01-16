@@ -1,4 +1,4 @@
-package org.example;
+package org.example.exercisesAndAssignments;
 
 public class IncrementDemo {
      int num = 10;

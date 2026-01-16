@@ -1,9 +1,9 @@
-package trafficLight;
+package org.example.exercisesAndAssignments.trafficLight;
 
 
 import java.util.Scanner;
 
-public class ModernSWitchTrafficLightSystem {
+public class SWitchExpressionTrafficLightSystem {
     public static void main(String[] args) {
         switchTrafficLightSystem();
     }
