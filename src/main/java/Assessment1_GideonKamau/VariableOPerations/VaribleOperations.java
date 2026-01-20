@@ -2,21 +2,24 @@ package Assessment1_GideonKamau.VariableOPerations;
 
 public class VaribleOperations {
 
-    //Declared three integer variables: a = 15, b = 4, c = 7
-    int a = 15;
-    int b = 4;
-    int c = 7;
+
 
     //Defined the main method  where I called the different methods
     public static void main(String[] args) {
-        addNumbers(15,4,7);
-        multiplyNumbers( 15,4);
-        addAndMultiplyNumbers(15,4,7);
-        getModule(15,4);
+
+        //Declared three integer variables: a = 15, b = 4, c = 7
+        int a = 15;
+        int b = 4;
+        int c = 7;
+
+        addNumbers(a,b,c);
+        multiplyNumbers( a,b);
+        addAndMultiplyNumbers(a,b,c);
+        getModule(a,b);
 
         //method overloading
-        addNumbers(15,7);
-        multiplyNumbers(15,4,7);
+        addNumbers(a,b);
+        multiplyNumbers(a,b,c);
 
     }
 
