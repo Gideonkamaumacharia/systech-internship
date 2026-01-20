@@ -40,7 +40,6 @@ public class ConsoleCalculator {
 
                 double result;
 
-
                 switch (operator) {
                     case '+':
                         result = addNumbers(firstNum , secondNum);  //used the addNumbers method here
