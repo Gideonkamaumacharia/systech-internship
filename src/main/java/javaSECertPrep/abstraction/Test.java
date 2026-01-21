@@ -1,4 +1,4 @@
-package javaSECert.abstraction;
+package javaSECertPrep.abstraction;
 
 public class Test {
     public static void main(String[] args) {
