@@ -13,4 +13,16 @@ public class UserInput {
         scanner.close(); // Always close scanner when done
     }
 }
-
+//// print prime numbers btn 1 and 50
+//
+//        for (int i = 1; i <= 50; i++) {
+//
+//        // prime number
+//
+//        if (condition) {
+//
+//        System.out.println();
+//
+//            }
+//
+//                    }
