@@ -1,4 +1,4 @@
-package javaSECert.exceptions;
+package javaSECertPrep.exceptions;
 
 import java.io.IOException;
 
