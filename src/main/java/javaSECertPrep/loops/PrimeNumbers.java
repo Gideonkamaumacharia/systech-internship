@@ -1,4 +1,4 @@
-package javaSECert.loops;
+package javaSECertPrep.loops;
 
 public class PrimeNumbers {
     public static void main(String[] args) {

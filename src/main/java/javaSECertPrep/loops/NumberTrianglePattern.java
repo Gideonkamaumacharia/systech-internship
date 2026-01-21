@@ -1,5 +1,4 @@
-package javaSECert.loops;
-import java.util.*;
+package javaSECertPrep.loops;
 
 public class NumberTrianglePattern {
     // Java Program to print pattern
