@@ -1,28 +1,15 @@
 package PracticeExercises.Wk2Day2;
 
 public class BankAccount {
-    //properties/fields
-    public String accountNumber;
-    public String accountHolder;
-    public double balance;
+    //properties/fields using encapsulation
+    private String accountNumber; //this.accountNumber
+    private String accountHolder;
+    private double balance;
 
-    public static void main(String[] args) {
-        //Created a BankAccount object and used the constructor with all parameters
-        BankAccount bankAccount = new BankAccount("09114578","Mhusika John",45000);
-//        bankAccount.depositAmount(12000);
-//        bankAccount.withdraw(10000);
-//        bankAccount.displayBalance();
 
-        //Created a BankAccount object and used the constructor with accountNumber and accountHolder parameters
-        BankAccount bankAccount1 = new BankAccount("8586969","John Mhusika",15000);
-        bankAccount1.depositAmount(16000);
-        bankAccount1.withdraw(8000);
-        bankAccount1.displayBalance();
-    }
-
-    //constructors
-            // -->a no args constructor goes here.Exists under the hood
-            //Can be explicitly created though like shown below
+    //No args constructor
+            //Exists under the hood
+            //Can be explicitly created though, like shown below
     public BankAccount(){
     }
 
@@ -39,19 +26,83 @@ public class BankAccount {
         this.balance = balance;
     }
 
-    public void depositAmount(double amount){
+    //Getters & Setters
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setAccountNumber(String accountNumber) {
+
+        if (accountNumber == null) {
+            System.out.println("Account number cannot be null");
+            return;
+        }
+        if(accountNumber.length() < 5 || accountNumber.length() >10){
+            System.out.println("Invalid account number.Must be 5-10 digits!");
+        }
+        //loop ensures
+        for(int i =0;i < accountNumber.length();i++){
+            if (!Character.isDigit(accountNumber.charAt(i))) {
+                System.out.println("Account number must contain only digits");
+                return;
+            }
+        }
+        this.accountNumber = accountNumber;
+    }
+
+    public String getAccountHolder() {
+        return accountHolder;
+    }
+
+    public void setAccountHolder(String accountHolder) {
+        if (accountHolder == null || accountHolder.isBlank()) {
+            System.out.println("Account holder name is required");
+            return;
+        }
+
+        for (char c : accountHolder.toCharArray()) {
+            if (Character.isDigit(c)) {
+                System.out.println("Name cannot contain numbers");
+                return;
+            }
+        }
+
+        this.accountHolder = accountHolder.trim();
+    }
+
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        if (balance < 0) {
+            System.out.println("Initial balance must be zero or more");
+            return;
+        }
+            //Added Math.round() to round a float or double to the nearest integer
+        this.balance = Math.round(balance * 100.0) / 100.0;
+    }
+
+
+    //other general custom methods
+    public void deposit(double amount){
         if (amount > 0) {
             balance += amount;
             System.out.println("Deposited: Kshs " + amount);
+        } else {
+            System.out.println("Error: Deposit amount must be positive");
         }
     }
 
     public void withdraw(double amount){
-        if (amount > 0 && amount <= balance) {
+        if (amount <= 0) {
+            System.out.println("Error: Withdrawal amount must be positive");
+        } else if(amount > balance){
+            System.out.println("Error: Insufficient funds or invalid amount");
+        }else{
             balance -= amount;
             System.out.println("Withdrawn: kshs " + amount);
-        } else {
-            System.out.println("Insufficient funds or invalid amount");
         }
     }
     public void displayBalance(){
