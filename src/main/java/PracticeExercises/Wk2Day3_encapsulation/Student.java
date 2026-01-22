@@ -135,6 +135,7 @@ public class Student {
 //            }
             scanner.nextLine();
 
+            //using setters to set the student details grabbed by the scanner
             Student newStudent = new Student(studentId, name, age, gpa);
             newStudent.setStudentId(studentId);
             newStudent.setName(name);
