@@ -1,4 +1,4 @@
-package org.example.exercisesAndAssignments;
+package org.gideon.Wk1.exercisesAndAssignments;
 
 public class IncrementDemo {
      int num = 10;

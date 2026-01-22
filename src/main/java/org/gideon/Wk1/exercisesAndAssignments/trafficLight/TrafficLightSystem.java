@@ -1,4 +1,4 @@
-package org.example.exercisesAndAssignments.trafficLight;
+package org.gideon.Wk1.exercisesAndAssignments.trafficLight;
 
 import java.util.Scanner;
 

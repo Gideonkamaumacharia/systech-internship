@@ -1,4 +1,4 @@
-package org.example.exercisesAndAssignments;
+package org.gideon.Wk1.exercisesAndAssignments;
 
 public class Casting {
     int myInt = 10; //Higher
