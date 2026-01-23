@@ -1,4 +1,4 @@
-package Assement2_Gideon_Kamau;
+package Assement2_Gideon_Kamau.problem2;
 
 public class Employee {
     private String name;
@@ -10,6 +10,8 @@ public class Employee {
         this.setId(id);
         this.setSalary(salary);
     }
+
+    public Employee(){}
 
     public String getName() {
         return name;
