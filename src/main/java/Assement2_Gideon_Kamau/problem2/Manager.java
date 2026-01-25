@@ -1,30 +1,34 @@
 package Assement2_Gideon_Kamau.problem2;
 
-public class Manager extends Employee {
-    private String department;
+enum DepartmentType {
+    HR, IT, SALES, FINANCE
+}
 
-    public Manager(String name, int id, int salary,String department) {
+public class Manager extends Employee {
+    private DepartmentType department;
+
+    public Manager(String name, int id, int salary,DepartmentType department) {
         super(name,id,salary);
-        this.department = department;
+        setDepartment(department);
     }
 
-    public String getDepartment() {
+    public DepartmentType getDepartment() {
         return department;
     }
 
-    public void setDepartment(String department) {
-        if(department == null || department.trim().isEmpty()){
+    public void setDepartment(DepartmentType department) {
+        if(department == null){
             throw new IllegalArgumentException("Department cannot be null or empty!");
         }
-        this.department = department.trim();
+        this.department = department;
     }
 
     @Override
     public void displayInfo() {
         System.out.println("Hello "+ getName());
         System.out.println("You are in the "+ getDepartment()+" .");
-        System.out.println("Your salary is "+ getSalary());
-        System.out.println("Calculated 15% of "+getSalary()+ " is "+calculateBonus());
+        System.out.println("Your salary is $"+ getSalary());
+        System.out.println("Calculated 15% of $"+getSalary()+ " is $"+calculateBonus());
     }
 
     @Override
@@ -33,8 +37,8 @@ public class Manager extends Employee {
     }
 
     public static void main(String[] args) {
-        new Manager("Kamau", 001, 150000, "IT").calculateBonus();
-        new Manager("Kamau", 001, 150000, "IT").displayInfo();
+        Manager manager = new Manager("Kamau", 1, 1500, DepartmentType.IT);
+        manager.displayInfo();
 
     }
 }
