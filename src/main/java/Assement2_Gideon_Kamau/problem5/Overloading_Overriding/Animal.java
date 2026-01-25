@@ -35,7 +35,7 @@ class Dog extends Animal {
     // Dog provides it own implementation of the makeSound() method
     @Override
     public void makeSound() {
-        System.out.println("The dog barks: Woof! Woof!");
+        System.out.println("The dog barks Woof! Woof!");
     }
 
 
