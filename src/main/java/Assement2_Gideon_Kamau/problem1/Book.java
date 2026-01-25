@@ -1,4 +1,4 @@
-package Assement2_Gideon_Kamau;
+package Assement2_Gideon_Kamau.problem1;
 
 public class Book{
 
@@ -97,9 +97,11 @@ public class Book{
     }
 
     public static void main(String[] args) {
-        System.out.println(new Book("Before the Rooster Crows","Peter Kimani","1234567890123",1500,true).toString());
 
-        new Book("Before the Rooster Crows","Peter Kimani","1234567890123",1500,true).borrowBook();
-        new Book("Before the Rooster Crows","Peter Kimani","1234567890123",1500,true).returnBook();
+        Book book =  new Book("Before the Rooster Crows","Peter Kimani","1234567890123",1500,true);
+        System.out.println( book.toString());
+        book.borrowBook();
+        book.returnBook();
+
     }
 }
