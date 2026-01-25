@@ -1,6 +1,6 @@
 package Assement2_Gideon_Kamau;
 
-public class Book {
+public class Book{
 
     private String title;
     private String author;
@@ -46,7 +46,7 @@ public class Book {
     }
 
     public void setIsbn(String isbn) {
-        if(isbn != null && isbn.matches("^\\d{13}$")){
+        if(isbn != null && isbn.matches("[A-Za-z0-9]{13}")){
             this.isbn = isbn;
         }else{
             throw new IllegalArgumentException("ISBN must be exactly 13 digits and must not be null!");
@@ -97,8 +97,9 @@ public class Book {
     }
 
     public static void main(String[] args) {
-        new Book("Before the rooster crows","Major Mwangi","1234567890123",1500,true).returnBook();
-        new Book("Before the rooster crows","Major Mwangi","1234567890123",1500,true).borrowBook();
-        System.out.println(new Book("Before the rooster crows","Major Mwangi","1234567890123",1500,true).toString());
+        System.out.println(new Book("Before the Rooster Crows","Peter Kimani","1234567890123",1500,true).toString());
+
+        new Book("Before the Rooster Crows","Peter Kimani","1234567890123",1500,true).borrowBook();
+        new Book("Before the Rooster Crows","Peter Kimani","1234567890123",1500,true).returnBook();
     }
 }
