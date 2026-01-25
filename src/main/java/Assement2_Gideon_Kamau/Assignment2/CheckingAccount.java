@@ -4,7 +4,7 @@ package Assement2_Gideon_Kamau.Assignment2;
 public class CheckingAccount extends BankAccount {
     private double overdraftLimit;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InvalidAmountException {
        CheckingAccount checkingAccount = new CheckingAccount("C999", "Bob", 100, 200);
 
         checkingAccount.withdraw(150);
@@ -29,9 +29,9 @@ public class CheckingAccount extends BankAccount {
     }
 
     @Override
-    public void withdraw(double amount) {
+    public void withdraw(double amount) throws InvalidAmountException {
         if (amount <= 0) {
-            throw new IllegalArgumentException("Withdrawal must be positive!");
+            throw new InvalidAmountException("Withdrawal must be positive!");
         }
         double currentBalance = getBalance();
         double potentialBalance = currentBalance - amount;

@@ -5,13 +5,16 @@ public class SavingsAccount extends BankAccount {
 
     public SavingsAccount(String accountNumber, String accountHolder, double balance, double interestRate) {
         super(accountNumber, accountHolder, balance);
+        if (balance < 100) {
+            throw new IllegalArgumentException("Savings account requires minimum balance of $100.");
+        }
         this.interestRate = interestRate;
     }
 
     @Override
-    public void withdraw(double amount) {
+    public void withdraw(double amount) throws InvalidAmountException {
         if (amount <= 0)
-            throw new IllegalArgumentException("Withdrawal must be positive");
+            throw new InvalidAmountException("Withdrawal must be positive") ;
 
         double potentialBalance = getBalance() - amount;
 
@@ -23,7 +26,7 @@ public class SavingsAccount extends BankAccount {
         }
     }
 
-    public void applyInterest() {
+    public void applyInterest() throws InvalidAmountException {
         double interest = getBalance() * interestRate;
         deposit(interest);
         System.out.println("Interest applied at rate " + (interestRate * 100) + "%. Your interest is $" + interest);

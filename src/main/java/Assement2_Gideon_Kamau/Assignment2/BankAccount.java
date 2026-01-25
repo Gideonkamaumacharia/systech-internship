@@ -12,7 +12,7 @@ public class BankAccount {
         this.setBalance(balance);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InvalidAmountException, InsufficientFundsException {
        BankAccount account = new BankAccount("7586695","Lucy",780);
 
         System.out.println("Your new balance is $"+account.getBalance());
@@ -55,21 +55,21 @@ public class BankAccount {
         this.balance = balance;
     }
 
-    public void deposit(double amount) {
+    public void deposit(double amount) throws InvalidAmountException {
         if (amount <= 0)
-            throw new IllegalArgumentException("Deposit must be positive");
+            throw new InvalidAmountException("Deposit must be positive");
         this.balance += amount;
         System.out.println("Deposited $" + amount + ". Your new Balance is $" + balance);
     }
 
-    public void withdraw(double amount) {
+    public void withdraw(double amount) throws InvalidAmountException, InsufficientFundsException {
         if (amount <= 0)
-            throw new IllegalArgumentException("Withdrawal must be positive");
+            throw new InvalidAmountException("Withdrawal must be positive");
         if (balance >= amount) {
             this.balance -= amount;
             System.out.println("Withdrawn $" + amount + ". Your new Balance is $" + balance);
         } else {
-            throw new IllegalArgumentException("Insufficient funds!");
+            throw new InsufficientFundsException("Insufficient funds!");
         }
     }
 
