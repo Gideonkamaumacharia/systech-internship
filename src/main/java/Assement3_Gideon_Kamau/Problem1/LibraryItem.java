@@ -3,6 +3,8 @@ package Assement3_Gideon_Kamau.Problem1;
 import Assement3_Gideon_Kamau.Problem1.Exceptions.InvalidItemIDException;
 import Assement3_Gideon_Kamau.Problem1.Exceptions.InvalidPropertyException;
 
+import java.time.LocalDate;
+
 public class LibraryItem {
     //private fields/properties
     private String itemId;
@@ -10,25 +12,38 @@ public class LibraryItem {
     private String author;
     private boolean isAvailable = true;//Initialized boolean to true
 
-    public static void main(String[] args) {
-        System.out.println("--- Testing LibraryItem Base Logic ---");
-        try {
-            // 1. Valid Creation & State Toggle
-            LibraryItem item = new LibraryItem("LIB-100", "Computer Science", "Joshua Bloch", true);
-            item.displayDetails();
-            item.checkout();   // Should succeed
-            item.checkout();   // Should show Error: currently unavailable
-            item.returnItem(); // Should succeed
-            item.returnItem(); // Should show Error: already in library
+        public static void main(String[] args) {
+            try {
+                // Initializing the array with Subclass objects
 
-            // 2. Testing ID Validation (Should throw InvalidItemIDException)
-            System.out.println("\nTesting Invalid ID Prefix...");
-            LibraryItem invalidItem = new LibraryItem("BOOK-101", "The Great Gatsby", "Paul Coelho", true);
+                LibraryItem[] items = {
+                        new Book("LIB-B001", "Effective Java", "Joshua Bloch", true, "123-4567890123", "Computer Science"),
+                        new DVD("LIB-D001", "Java Tutorial", "Jane Smith", true, 120, "PG"),
+                        new Magazine("LIB-M001", "Tech Monthly", "Tech Press", true, "15", LocalDate.parse("2024-03-01"))
+                };
 
-        } catch (Exception e) {
-            System.out.println("Caught Expected Error: " + e.getMessage());
+                System.out.println("======= LIBRARY MANAGEMENT SYSTEM =======");
+
+                // Polymorphic behavior: Calling the same methods on different object types
+                for (LibraryItem item : items) {
+                    System.out.println("\n--- Processing Item ---");
+
+                    // Calls the specific displayDetails() for Book, DVD, or Magazine
+                    item.displayDetails();
+
+                    // Executes the checkout logic
+                    item.checkout();
+
+                    // Verifying status change
+                    System.out.println("Updated Status: " + (item.isAvailable() ? "Available" : "Checked Out"));
+                }
+
+            } catch (Exception e) {
+                System.err.println("Critical System Error: " + e.getMessage());
+            }
         }
-    }
+
+
 
 
     //libraryItem constructor
