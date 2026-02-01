@@ -1,4 +1,7 @@
 package Assement3_Gideon_Kamau.Problem3.Books.Exceptions;
 
-public class InvalidAuthorException {
+public class InvalidAuthorException extends RuntimeException{
+    public InvalidAuthorException(String message){
+        super(message);
+    }
 }
