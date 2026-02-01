@@ -8,6 +8,7 @@ import Assement3_Gideon_Kamau.Problem3.Product;
 import Assement3_Gideon_Kamau.Problem3.ProductType;
 
 public class Clothing extends Product {
+
     //properties
     private String size;
     private String material;
@@ -22,6 +23,74 @@ public class Clothing extends Product {
         this.setMaterial(material);
         this.setColor(color );
     }
+
+    /*
+     * The main method serves as a unit test for the Clothing class.
+     * It demonstrates successful object creation and handles specific
+     * custom exceptions to satisfy the assessment's error-handling requirements.
+     */
+    public static void main(String[] args) {
+        System.out.println("--- Starting Clothing Product System Test ---\n");
+
+        /*
+         * SCENARIO 1: Successful Clothing Creation
+         * Testing where all data is valid.
+         * Material is set to 'Cotton' to trigger the extra $5 discount logic.
+         */
+        try {
+            System.out.println("TEST 1: Valid Clothing Creation (Cotton Material)");
+            Clothing summerShirt = new Clothing(
+                    "PRDCT-C001",
+                    "Summer T-Shirt",
+                    100,
+                    40.0,
+                    ProductType.CLOTHING,
+                    "Large",
+                    "Cotton",
+                    "Sky Blue"
+            );
+            summerShirt.displayProductInfo();
+        } catch (Exception e) {
+            System.out.println("Unexpected Error in Test 1: " + e.getMessage());
+        }
+
+        /*
+         * SCENARIO 2: Size Validation (InvalidProductSizeException)
+         * Attempting to create clothing with an empty size string.
+         */
+        try {
+            System.out.println("\nTEST 2: Triggering Size Validation (Empty Size)");
+            Clothing invalidSize = new Clothing(
+                    "PRDCT-C002", "Jeans", 50, 60.0, ProductType.CLOTHING,
+                    "", // Invalid size
+                    "Denim", "Blue"
+            );
+        } catch (InvalidProductSizeException e) {
+            System.out.println("Validation Error Caught: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("General Error: " + e.getMessage());
+        }
+
+        /*
+         * SCENARIO 3: Color Validation (InvalidProductColorException)
+         * Attempting to create clothing with a null color reference.
+         */
+        try {
+            System.out.println("\nTEST 3: Triggering Color Validation (Null Color)");
+            Clothing invalidColor = new Clothing(
+                    "PRDCT-C003", "Sweater", 20, 85.0, ProductType.CLOTHING,
+                    "Medium", "Wool",
+                    null // Invalid color
+            );
+        } catch (InvalidProductColorException e) {
+            System.out.println("Validation Error Caught: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("General Error: " + e.getMessage());
+        }
+
+        System.out.println("\n--- Clothing System Test Completed ---");
+    }
+
 
     //Getters and setters
 
