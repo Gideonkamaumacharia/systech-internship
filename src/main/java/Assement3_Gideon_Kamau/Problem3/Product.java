@@ -25,6 +25,77 @@ public abstract class Product {
         this.setProductType(productType); ;
     }
 
+    /*
+     * The main method in this abstract class serves as a utility to test
+     * shared logic like ID validation and Tax calculation.
+     * Since Product is abstract, I use a simple anonymous classes(covered last week) for testing.
+     */
+    public static void main(String[] args) {
+        System.out.println("--- Starting Abstract Product Core Logic Test ---\n");
+
+        /*
+         * SCENARIO 1: Testing Shared Concrete Logic (Tax Calculation)
+         * We create a product to verify that the applyTax() method
+         * correctly calculates the 10% tax.
+         */
+        try {
+            System.out.println("TEST 1: Verifying Shared Tax Logic");
+            //Anonymous class
+            Product testProduct = new Product("PRDCT-TEST", "Test Item", 10, 100.0, ProductType.BOOKS) {
+                @Override
+                public ProductType getProductType() { return ProductType.BOOKS; }
+                @Override
+                public double calculateDiscount() { return 0.0; }
+            };
+
+            System.out.println("Base Price: " + testProduct.getBasePrice());
+            System.out.println("Price with 10% Tax: " + testProduct.applyTax());
+            // Expected: 110.0
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
+        /*
+         * SCENARIO 2: Product ID Format Validation
+         * Testing the 'PRDCT-' prefix requirement.
+         */
+        try {
+            System.out.println("\nTEST 2: Triggering Invalid Product ID (Missing PRDCT- prefix)");
+            Product badId = new Product("ITEM-001", "Bad ID", 5, 50.0, ProductType.CLOTHING) {
+                @Override
+                public ProductType getProductType() { return ProductType.CLOTHING; }
+                @Override
+                public double calculateDiscount() { return 0.0; }
+            };
+        } catch (InvaliProductIdException e) {
+            System.out.println("Validation Error Caught: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Unexpected Error: " + e.getMessage());
+        }
+
+        /*
+         * SCENARIO 3: Price Validation
+         * Verifying that negative prices are blocked.
+         */
+        try {
+            System.out.println("\nTEST 3: Triggering Invalid Price Validation");
+            Product badPrice = new Product("PRDCT-001", "Negative Item", 5, -99.99, ProductType.ELECTRONICS) {
+                @Override
+                public ProductType getProductType() { return ProductType.ELECTRONICS; }
+                @Override
+                public double calculateDiscount() { return 0.0; }
+            };
+        } catch (InvalidPriceException e) {
+            System.out.println("Validation Error Caught: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Unexpected Error: " + e.getMessage());
+        }
+
+        System.out.println("\n--- Product Core Logic Test Completed ---");
+    }
+
+
+
     //getters and setters
 
     public String getProductId() {
