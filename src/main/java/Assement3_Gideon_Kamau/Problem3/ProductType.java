@@ -25,10 +25,6 @@ public enum ProductType {
 }
 
 
-//public Electronics(String id, String name, double price, int stock) {
-//    super(id, name, price, stock, ProductType.ELECTRONICS);
-//    // ... electronics specific fields ...
-//}
 
 
 
