@@ -1,5 +1,6 @@
 package Assement3_Gideon_Kamau.Problem3.Books;
 
+import Assement3_Gideon_Kamau.Problem3.Books.Exceptions.InvalidAuthorException;
 import Assement3_Gideon_Kamau.Problem3.Exceptions.InvalidPriceException;
 import Assement3_Gideon_Kamau.Problem3.Exceptions.InvalidProductDataException;
 import Assement3_Gideon_Kamau.Problem3.Product;
@@ -17,7 +18,7 @@ public class Books extends Product {
     private String author;
     private String publisher;
     private String isbn;
-    private LocalDate publicationDate; // Used to simulate the date-based discount logic requested
+    private LocalDate publicationDate;
 
     /*
      * Constructor for Book.
@@ -27,14 +28,78 @@ public class Books extends Product {
     public Books(String productId, String productName, double basePrice, int stockLevel,
                 String author, String publisher, String isbn, LocalDate publicationDate) throws InvalidPriceException {
 
-        super(productId, productName, (int) basePrice, stockLevel, ProductType.BOOKS);
-
-        // Use local setters for validation
+        super(productId, productName, stockLevel,basePrice, ProductType.BOOKS);
         this.setAuthor(author);
         this.setPublisher(publisher);
         this.setIsbn(isbn);
         this.setPublicationDate(publicationDate);
     }
+
+    /**
+     * Test class to demonstrate the Book system implementation.
+     * It covers successful instantiation, logic calculations, and
+     * comprehensive exception handling as required.
+     */
+
+        public static void main(String[] args) {
+            System.out.println("--- Starting E-Commerce Product System Test ---\n");
+
+            try {
+                /*
+                 * SCENARIO 1: Successful Book Creation
+                 * Testing a book older than 12 months to trigger the extra discount logic.
+                 */
+                System.out.println("TEST 1: Valid Book Creation and Calculation");
+                LocalDate backLogDate = LocalDate.now().minusMonths(14);
+
+                Books validBook = new Books("PRDCT-101", "Clean Code", 1500.0, 20, "Robert C. Martin", "Pearson", "978-0132350884", backLogDate
+                );
+
+                validBook.displayProductInfo();
+                // This will show: 10% base discount + 50.0 backlog incentive
+
+                /*
+                 * SCENARIO 2: Validating Product Data (Exception Handling)
+                 * Attempting to create a book with an invalid (empty) author.
+                 */
+                System.out.println("\nTEST 2: Triggering Data Validation (Invalid Author)");
+                Books invalidBook = new Books(
+                        "PRDCT-102",
+                        "Java Programming",
+                        1200.0,
+                        10,
+                        null, // Invalid: should trigger Exception
+                        "Oracle Press",
+                        "123-4567890",
+                        LocalDate.now()
+                );
+
+            } catch (InvalidAuthorException iae) {
+                /*
+                 * This catches errors from setAuthor, setIsbn, etc.
+                 * fulfilling the 'Demonstrate comprehensive exception handling' requirement.
+                 */
+                System.out.println("Validation Error Caught: " +iae.getMessage());
+            } catch (Exception e) {
+                System.out.println("An unexpected error occurred: " + e.getMessage());
+            }
+
+            try {
+                /*
+                 * SCENARIO 3: Validating Price Data
+                 * Attempting to set a negative price.
+                 */
+                System.out.println("\nTEST 3: Triggering Data Validation (Negative Price)");
+                Books priceTest = new Books("PRDCT-103", "Test", -10.0, 5, "A", "P", "I", LocalDate.now());
+
+            } catch (InvalidPriceException e) {
+                System.out.println("Price Error Caught: " + e.getMessage());
+            }
+
+            System.out.println("\n--- Product System Test Completed ---");
+        }
+
+
 
     /*
      * Implementation of the abstract calculateDiscount method.
@@ -88,7 +153,7 @@ public class Books extends Product {
 
     public void setAuthor(String author) {
         if (author == null || author.trim().isEmpty()) {
-            throw new InvalidProductDataException("Author name cannot be empty.");
+            throw new InvalidAuthorException("Author name cannot be empty.");
         }
         this.author = author;
     }
@@ -110,7 +175,6 @@ public class Books extends Product {
 
     /*
      * Validates that the ISBN is provided.
-     * (Extended validation for ISBN length could be added here).
      */
     public void setIsbn(String isbn) {
         if (isbn == null || isbn.trim().isEmpty()) {
