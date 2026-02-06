@@ -5,7 +5,7 @@ public class Test {
         Game g = new Soccer();
         //1
         g.play();
-        Soccer a = (Soccer) g;
+        Soccer a = (Soccer) g; //Down casting--> the object in memory was alredy Soccer
         //2
         a.play();
         //Which of the given options can be inserted at 1 & 2?
