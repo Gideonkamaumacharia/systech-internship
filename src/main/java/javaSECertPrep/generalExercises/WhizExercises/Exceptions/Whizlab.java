@@ -13,15 +13,15 @@ class Whizlab {
             //different value within the catch block.
             if (e instanceof ArrayIndexOutOfBoundsException) {
 
-                e = new ArrayIndexOutOfBoundsException("Out of bounds");//Cannot assign a value to final variable 'e'
+               // e = new ArrayIndexOutOfBoundsException("Out of bounds");//Cannot assign a value to final variable 'e'
 
             } else if(e instanceof NullPointerException) {
 
-                e = new NullPointerException("Null Value");//Cannot assign a value to final variable 'e'
+                //e = new NullPointerException("Null Value");//Cannot assign a value to final variable 'e'
 
             } else {
 
-                e = new ArithmeticException("Arithmetic");//Cannot assign a value to final variable 'e'
+                //e = new ArithmeticException("Arithmetic");//Cannot assign a value to final variable 'e'
 
             }
 
