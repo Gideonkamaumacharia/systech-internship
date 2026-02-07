@@ -14,8 +14,9 @@ public class List {
 //        System.out.println("Array element  reset "+list.set(2,"G")); //Array element  reset C
 
         ArrayList<Integer> nums = new ArrayList<>();
-        nums.add(1);
         nums.add(2);
+        nums.add(2);
+        nums.add(1);
         nums.add(2);
         nums.add(3);
 
@@ -28,7 +29,10 @@ public class List {
         * */
 
         ArrayList list3 = new ArrayList<String>();
+        list3.add("Carol");
+        list3.add("Regina");
         list3.add("Simon");
+        list3.add("Abel");
         System.out.println(list3);
     }
 }
