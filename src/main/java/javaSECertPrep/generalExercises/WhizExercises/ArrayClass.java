@@ -3,7 +3,7 @@ package javaSECertPrep.generalExercises.WhizExercises;
 public class ArrayClass {
         public static void main(String[] args) {
 
-            int [][]ints = new int[3][2];
+            int [][]ints = new int[3][2];//This means 3 rows and two columns {[0,0,0],[0,0],[0,0]}
 
             ints[0] = new int[3];
 
