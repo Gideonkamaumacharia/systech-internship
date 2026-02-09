@@ -3,8 +3,6 @@ package javaSECertPrep.generalExercises.Animal;
 public class Main {
 
     public static void main(String[] args) {
-        Animal myAnimal = new Animal();
-        myAnimal.makeNoise();
 
         //Anonymous class
         Animal cat = new Animal(){
@@ -14,6 +12,8 @@ public class Main {
             }
         };
 
+
+
         //Anonymous class that implements an existing interface
         Runnable anonymousRunnable = new Runnable() {
             @Override
@@ -21,7 +21,8 @@ public class Main {
                 System.out.println("This is a runnable anonymous class!");
             }
         };
-
+    cat.makeNoise();
+    anonymousRunnable.run();
     }
 
 }

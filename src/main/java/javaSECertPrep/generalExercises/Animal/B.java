@@ -1,6 +1,5 @@
 package javaSECertPrep.generalExercises.Animal;
 
-import org.w3c.dom.ls.LSOutput;
 
 public class B extends A{
    public static void main (String[] args){
