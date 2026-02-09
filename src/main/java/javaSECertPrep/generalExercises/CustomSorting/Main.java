@@ -34,7 +34,8 @@ public class Main {
             }
         };
 
-        Collections.sort(studs,comparable);
+
+        Collections.sort(studs);
 
         System.out.println(studs);
         //Comparator & Comparable

@@ -45,21 +45,21 @@ public class Students implements Comparable<Students> {
                 '}';
     }
 
-//    @Override
-//    public int compareTo(Students that) {
-//        if(this.getAge() > that.getAge()){
-//            return 1;
-//        } else if (this.getAge() == that.getAge()) {
-//            return 0;
-//        }
-//        return -1;
-//    }
-
     @Override
-    public int compareTo(Students other) {
-        // Compare by age (ascending)
-        return Integer.compare(this.age, other.age);
+    public int compareTo(Students that) {
+        if(this.getAge() > that.getAge()){
+            return 1;
+        } else if (this.getAge() == that.getAge()) {
+            return 0;
+        }
+        return -1;
     }
+
+//    @Override
+//    public int compareTo(Students other) {
+//        // Compare by age (ascending)
+//        return Integer.compare(this.age, other.age);
+//    }
 
 
 
