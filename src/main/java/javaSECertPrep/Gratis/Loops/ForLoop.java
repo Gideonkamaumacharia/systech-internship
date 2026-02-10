@@ -1,4 +1,4 @@
-package javaSECertPrep.Gratis.QuestionB;
+package javaSECertPrep.Gratis.Loops;
 
 public class ForLoop {
     static void main() {
