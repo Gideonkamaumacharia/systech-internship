@@ -1,4 +1,4 @@
-package javaSECertPrep.Gratis.QuestionB;
+package javaSECertPrep.Gratis.Loops;
 
 public class Shirts {
     static void main() {
