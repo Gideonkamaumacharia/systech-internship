@@ -1,5 +1,7 @@
 package javaSECertPrep.generalExercises.WhizExercises.Exceptions;
 
+import java.util.Vector;
+
 public class ExceptionHandling {
     public static void main(String[] args){
         int ans;
