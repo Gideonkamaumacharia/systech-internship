@@ -56,6 +56,32 @@ public class Maps {
         System.out.println(students.get("Gideon")); //Prints 90 --> so the get() method is provided with the key & returns the value
         System.out.println(students.remove("Abednego"));
         System.out.println(students);
+
+        //Iterating through a map
+        /*
+        * It is not ossible to iterate through a map directly using a for loop or for each loop
+        * This is because a map is not an iterable
+        * Therefore attempting to iterate  a map will not compile
+        *
+        * */
+
+        System.out.println("++++++++++   Iterating through a map using keySet() +++++++++++");
+        for(String student : students.keySet()){
+
+            System.out.println(student);
+        }
+
+        System.out.println("++++++++++   Iterating through a map using values() +++++++++++");
+        for(Integer grade : students.values()){
+            System.out.println(grade);
+        }
+
+        System.out.println("=========  Iterating through a map using entrySet( both values and keys) =========");
+        for(Map.Entry<String,Integer> entry : students.entrySet()){
+            System.out.println(entry.getKey() +" = "+entry.getValue());
+        }
+
+
     }
 
     public static void main(String[] args){
