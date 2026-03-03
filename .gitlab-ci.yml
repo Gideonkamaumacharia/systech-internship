@@ -3,39 +3,43 @@ stages:
   - test
   - package
   - artifact
+
 image: maven:3.9-eclipse-temurin-17
 
 compile-code:
   stage: build
   script:
+    - cd src/main/java/Assement2_Gideon_Kamau/Assignment2
     - mvn compile
   rules:
-    - if: $CI_COMMIT_BRANCH == "feature/workflow" || $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH == "develop" || $CI_COMMIT_BRANCH == "main"
 
 unit-tests:
   stage: test
   script:
+    - cd src/main/java/Assement2_Gideon_Kamau/Assignment2
     - mvn test
   rules:
-    - if: $CI_COMMIT_BRANCH == "feature/workflow" || $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH == "develop" || $CI_COMMIT_BRANCH == "main"
 
 build-jar:
   stage: package
   script:
+    - cd src/main/java/Assement2_Gideon_Kamau/Assignment2
     - mvn package -DskipTests
   rules:
     - if: $CI_COMMIT_BRANCH == "main"
   artifacts:
     paths:
-      - target/*.jar
 
+      - src/main/java/Assement2_Gideon_Kamau/Assignment2/target/*.jar
 
 store-artifact:
   stage: artifact
   image: busybox
   script:
     - mkdir -p deploy_ready
-    - cp target/*.jar deploy_ready/
+    - cp src/main/java/Assement2_Gideon_Kamau/Assignment2/target/*.jar deploy_ready/
     - echo "Build successful. Artifact ready for download."
   rules:
     - if: $CI_COMMIT_BRANCH == "main"
