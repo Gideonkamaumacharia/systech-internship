@@ -1,3 +1,6 @@
+include:
+  - template: Jobs/SAST.gitlab-ci.yml
+
 stages:
   - build
   - test
@@ -44,3 +47,4 @@ store-artifact:
     paths:
       - deploy_ready/
     expire_in: 1 week
+
