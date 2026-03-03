@@ -3,7 +3,6 @@ stages:
   - test
   - package
   - artifact
-
 image: maven:3.9-eclipse-temurin-17
 
 compile-code:
@@ -29,6 +28,7 @@ build-jar:
   artifacts:
     paths:
       - target/*.jar
+
 
 store-artifact:
   stage: artifact
