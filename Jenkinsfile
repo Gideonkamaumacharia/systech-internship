@@ -1,31 +1,51 @@
 pipeline {
     agent any
 
-    tools {
-        // This must match the name you gave Maven in "Global Tool Configuration"
-        maven 'Default'
+    triggers {
+        githubPush() // Listens for GitHub Webhooks
+    }
+
+    environment {
+        // Update these to match YOUR project
+        BUILD_DIR   = "my-deploy-folder"
+        REPO_URL    = "https://github.com/Gideonkamaumacharia/systech-internship.git"
+        BRANCH      = "main"
+        // If your pom.xml is in the root, you might not even need PROJECT_DIR
     }
 
     stages {
-        stage('Checkout') {
+        stage('Checkout Code') {
             steps {
-                // This pulls your code from the repo configured in the job
-                checkout scm
+                // Uses the variables defined above
+                git branch: "${BRANCH}",
+                    credentialsId: 'github-creds', // Match your Credential ID
+                    url: "${REPO_URL}"
             }
         }
 
-        stage('Build and Test') {
+        stage('Build and Test with Maven') {
             steps {
-                // This is the equivalent of your "clean test" goal
-                sh 'mvn clean test'
+                // Maven equivalent of ./gradlew clean build
+                sh 'mvn clean package'
+            }
+        }
+
+        stage('Organize Artifacts') {
+            steps {
+                sh """
+                    mkdir -p ${BUILD_DIR}
+                    # Maven puts its jars in the 'target' folder
+                    cp target/*.jar ${BUILD_DIR}/
+                """
             }
         }
     }
 
     post {
-        always {
-            // This captures your test results so Jenkins can show graphs
-            junit '**/target/surefire-reports/*.xml'
+        success {
+            // This 'archives' the file so you can download it from the Jenkins UI
+            archiveArtifacts artifacts: "${BUILD_DIR}/*.jar", fingerprint: true
+            echo "Build Success! Check the 'Artifacts' section in Jenkins."
         }
     }
 }
