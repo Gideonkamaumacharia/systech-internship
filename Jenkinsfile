@@ -1,31 +1,37 @@
 pipeline {
     agent any
 
+    tools {
+            jdk 'jdk21'
+            maven 'maven3'
+        }
+
     triggers {
-        githubPush() // Listens for GitHub Webhooks
+        githubPush()
     }
 
     environment {
-        // Update these to match YOUR project
-        BUILD_DIR   = "my-deploy-folder"
-        REPO_URL    = "https://github.com/Gideonkamaumacharia/systech-internship.git"
-        BRANCH      = "main"
-        // If your pom.xml is in the root, you might not even need PROJECT_DIR
+        BUILD_DIR       = "my-deploy-folder"
+        REPO_URL        = "https://github.com/Gideonkamaumacharia/systech-internship.git"
+        BRANCH          = "main"
+        // --- Added for Docker Hub ---
+        DOCKERHUB_USER  = "gideonkamau"
+        IMAGE_NAME      = "systech-app"
+        IMAGE_TAG       = "${env.BUILD_NUMBER}"
     }
 
     stages {
         stage('Checkout Code') {
             steps {
-                // Uses the variables defined above
+                sh 'java -version'
                 git branch: "${BRANCH}",
-                    credentialsId: 'github-creds', // Match your Credential ID
+                    credentialsId: 'github-creds',
                     url: "${REPO_URL}"
             }
         }
 
         stage('Build and Test with Maven') {
             steps {
-                // Maven equivalent of ./gradlew clean build
                 sh 'mvn clean package'
             }
         }
@@ -34,18 +40,39 @@ pipeline {
             steps {
                 sh """
                     mkdir -p ${BUILD_DIR}
-                    # Maven puts its jars in the 'target' folder
-                    cp target/*.jar ${BUILD_DIR}/
+                    cp target/*.jar ${BUILD_DIR}/app.jar
                 """
+            }
+        }
+
+        // --- NEW STAGE: Build and Push to Docker Hub ---
+        stage('Docker Build & Push') {
+            steps {
+                script {
+                    sh "docker build -t ${DOCKERHUB_USER}/${IMAGE_NAME}:${IMAGE_TAG} ."
+
+                    // 2. Login and Push using Jenkins Credentials
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub-creds',
+                                     usernameVariable: 'USER',
+                                     passwordVariable: 'PASS')]) {
+                        sh "echo ${PASS} | docker login -u ${USER} --password-stdin"
+                        sh "docker push ${DOCKERHUB_USER}/${IMAGE_NAME}:${IMAGE_TAG}"
+                        sh "docker tag ${DOCKERHUB_USER}/${IMAGE_NAME}:${IMAGE_TAG} ${DOCKERHUB_USER}/${IMAGE_NAME}:latest"
+                        sh "docker push ${DOCKERHUB_USER}/${IMAGE_NAME}:latest"
+                    }
+                }
             }
         }
     }
 
     post {
         success {
-            // This 'archives' the file so you can download it from the Jenkins UI
             archiveArtifacts artifacts: "${BUILD_DIR}/*.jar", fingerprint: true
-            echo "Build Success! Check the 'Artifacts' section in Jenkins."
+            echo "Build & Push Success! Image available at ${DOCKERHUB_USER}/${IMAGE_NAME}:${IMAGE_TAG}"
+        }
+        always {
+            // Cleanup to save space on your Fedora machine
+            sh "docker logout"
         }
     }
 }
