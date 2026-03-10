@@ -1,0 +1,50 @@
+include:
+  - template: Jobs/SAST.gitlab-ci.yml
+
+stages:
+  - build
+  - test
+  - package
+  - artifact
+
+image: maven:3.9-eclipse-temurin-21
+
+compile-code:
+  stage: build
+  script:
+    - mvn compile
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop" || $CI_COMMIT_BRANCH == "main"
+
+unit-tests:
+  stage: test
+  script:
+    - mvn test
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop" || $CI_COMMIT_BRANCH == "main"
+
+build-jar:
+  stage: package
+  script:
+    - mvn package -DskipTests
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop" || $CI_COMMIT_BRANCH == "main"
+  artifacts:
+    paths:
+      - target/*.jar
+
+store-artifact:
+  stage: artifact
+  image: busybox
+  script:
+    - mkdir -p deploy_ready
+    - cp target/*.jar deploy_ready/
+    - echo "Build successful. Artifact ready for download."
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop" || $CI_COMMIT_BRANCH == "main"
+  artifacts:
+    name: "Banking-Project-Release-$CI_COMMIT_SHORT_SHA"
+    paths:
+      - deploy_ready/
+    expire_in: 1 week
+
