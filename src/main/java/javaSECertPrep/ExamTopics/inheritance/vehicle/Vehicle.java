@@ -1,4 +1,4 @@
-package javaSECertPrep.inheritance.vehicle;
+package javaSECertPrep.ExamTopics.inheritance.vehicle;
 
 public class Vehicle {
     int x;
