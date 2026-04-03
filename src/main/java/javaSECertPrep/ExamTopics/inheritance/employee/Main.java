@@ -1,4 +1,4 @@
-package javaSECertPrep.inheritance.employee;
+package javaSECertPrep.ExamTopics.inheritance.employee;
 
 public class Main {
     static void main() {
